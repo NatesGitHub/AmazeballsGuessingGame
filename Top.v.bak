@@ -1,0 +1,26 @@
+`timescale 1ns / 1ns // `timescale time_unit/time_precision
+//===============================================
+// LSFR (LINEAR FEEDBACK SHIFT REGISTER)
+//===============================================
+module Top(
+	input CLOCK_50, enable, resetn, // Input Ports
+	input [10:0] SW, // Selection
+	input [3:0] KEY,
+	
+	output [10:0] LEDR,
+	output [7:0] HEX0, HEX1, HEX2, HEX4, HEX5
+	);
+
+	// Other Internal Variables
+	reg [3:0] rand;
+
+	//------------------------------------------
+	
+	LSFR rand_lsfr
+		(
+		.clk(CLOCK_50),
+		.enable(KEY[2]),
+		.rst[KEY[3]],
+		.out(rand)
+		);
+	
